@@ -4,7 +4,7 @@
 
 ## Proposito
 
-- _Reiniciar los tuneles creados por localtunnel y ngrok en el servidor local_; debido a que en el plan gratuito estos tuneles vecen cada ciertas horas hice estos scripts para reiniciar sus servicios, lo cual genera un nuevo tunel, luego se suben los enlaces de dichos tuneles a un repositorio de GitHub ( [Repositorio](https://github.com/davidoreiro97/endpointsAppsTesting.git) ). Estos enlaces luego serán utilizados por los proyectos de prueba que hago.
+- Reiniciar los tuneles creados por localtunnel y ngrok en el servidor local_; debido a que en el plan gratuito estos tuneles vecen cada ciertas horas hice estos scripts para reiniciar sus servicios, lo cual genera un nuevo tunel, luego se suben los enlaces de dichos tuneles a un repositorio de GitHub ( [Repositorio](https://github.com/davidoreiro97/endpointsAppsTesting.git) ). Estos enlaces luego serán utilizados por los proyectos de prueba que hago.
 
 ---
 
@@ -34,12 +34,14 @@
 ---
 
 ## Configuración
-
-- Iniciar el repositorio de GitHub y agregar como origen remoto donde se guardarán los endpoints para luego poder hacer el push
-  en el script generar_endpointsjson_y_git_push.ps1 .
-- Previamente debe estar instalado ngrok([ngrok](https://ngrok.com/)) y localtunnel([localtunnel](https://theboroer.github.io/localtunnel-www/))
+- Clonar este repositorio
+- Agregar una carpeta "endpointsParaGithub".
+- Inicializar el repositorio "endpointsParaGithub" con git init.
+- Agregar el repositorio remoto donde se subira el json con los endpoints, en mi caso git remote add origin https://github.com/davidoreiro97/endpointsAppsTesting.git
+- Hacer un pull si hay cambios en el repositorio.
+- Crear la carpeta "archivosTemp".
+- Previamente debe estar instalado ngrok([ngrok](https://ngrok.com/)) y localtunnel([localtunnel](https://theboroer.github.io/localtunnel-www/)).
 - Editar dentro del script "reset_localtunnel.ps1" :
-
   - $nodePath : Cambiar la ruta hacia donde esté instalado node.exe .
   - $ltPath : Cambiar la ruta hacia donde estén los binarios de localtunnel.
   - $port_lt : Puerto donde correra localtunnel
