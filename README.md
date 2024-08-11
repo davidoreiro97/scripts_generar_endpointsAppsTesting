@@ -44,14 +44,13 @@
 - Editar dentro del script "reset_localtunnel.ps1" :
   - $nodePath : Cambiar la ruta hacia donde esté instalado node.exe .
   - $ltPath : Cambiar la ruta hacia donde estén los binarios de localtunnel.
-  - $port_lt : Puerto donde correra localtunnel
-  - $urlPath_lt : Ruta donde se guardará la url del tunel de localtunnel.
-  - $pidPath_lt : Ruta donde se guardará el PID de localtunnel.
+  - $port : Puerto donde correra localtunnel
+  - $urlPath: Ruta donde se guardará la url del tunel de localtunnel.
+  - $pidPath: Ruta donde se guardará el PID de localtunnel.
   - $script_generar_endpoint_push : Ruta donde se guardará el script que generará el json y hará el push.
 
 - Editar dentro del script "generar_endpointsjson_y_git_push.ps1" :
-
-  - $localtunnel_path_url : Ruta donde se guardará el archivo de texto que contiene la url de localtunnel.
+  - $localtunnel_path_url : Ruta donde se guarda el archivo de texto que contiene la url de localtunnel.
   - $endpointsJSON_path : Ruta donde se guardará el archivo json con las url, el cual luego será subido a github.
   - $addcommitpush_path : Ruta donde está el archivo json y en donde se realizará el push.
 
