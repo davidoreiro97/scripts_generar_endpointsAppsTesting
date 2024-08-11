@@ -4,15 +4,11 @@
 
 ## Proposito
 
----
-
 - _Reiniciar los tuneles creados por localtunnel y ngrok en el servidor local_; debido a que en el plan gratuito estos tuneles vecen cada ciertas horas hice estos scripts para reiniciar sus servicios, lo cual genera un nuevo tunel, luego se suben los enlaces de dichos tuneles a un repositorio de GitHub ( [Repositorio](https://github.com/davidoreiro97/endpointsAppsTesting.git) ). Estos enlaces luego serán utilizados por los proyectos de prueba que hago.
 
 ---
 
 ## Contenido
-
----
 
 - Carpeta "scripts"
 
@@ -39,8 +35,6 @@
 
 ## Configuración
 
----
-
 - Iniciar el repositorio de GitHub y agregar como origen remoto donde se guardarán los endpoints para luego poder hacer el push
   en el script generar_endpointsjson_y_git_push.ps1 .
 - Previamente debe estar instalado ngrok([ngrok](https://ngrok.com/)) y localtunnel([localtunnel](https://theboroer.github.io/localtunnel-www/))
@@ -62,8 +56,8 @@
 - Crear tareas programadas en Windows :
   - Se debe crear dos tareas programadas, una que ejecute "reset_localtunnel.ps1" cada 12h y otra que ejecute "reset_ngrok.ps1" cada 6h o menos.
 
-#### Programar las tareas para ejecutarlas en Windows
-
 ---
+
+#### Programar las tareas para ejecutarlas en Windows
 
 [Video tutorial](https://youtu.be/CJw_JEt_L6I?t=258)
