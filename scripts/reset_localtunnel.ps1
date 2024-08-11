@@ -1,10 +1,10 @@
 ﻿# Este script detiene localtunnel si está funcionando, genera dos txt con su PID y la url obtenida.
 $nodePath = "C:\Program Files\nodejs\node.exe"
-$ltPath = "C:\Program Files\nodejs\node_modules\localtunnel\bin\lt.js"
-$port = 5173
-$urlPath = "C:\Users\Escritorio\Desktop\scriptTunnels\endpointsParaGithub\archivosTemp\localtunnel_url.txt"
-$pidPath = "C:\Users\Escritorio\Desktop\scriptTunnels\endpointsParaGithub\archivosTemp\localtunnel_pid.txt"
-$script_generar_endpoint_push = "C:\Users\Escritorio\Desktop\scriptTunnels\scripts\generar_endpointsjson_y_git_push.ps1"
+$ltPath = "C:\Users\Server\AppData\Roaming\npm\node_modules\localtunnel\bin\lt.js"
+$port = 3000
+$urlPath = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosTemp\localtunnel_url.txt"
+$pidPath = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosTemp\localtunnel_pid.txt"
+$script_generar_endpoint_push = "C:\Users\Server\Desktop\scriptsTunnels\scripts\generar_endpointsjson_y_git_push.ps1"
 
 # Leer el PID de localtunnel si existe
 if (Test-Path $pidPath) {

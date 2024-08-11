@@ -1,9 +1,9 @@
 # Recupera el contenido de localtunnel_url.txt y ngrok_url.txt los cuales contienen las url de los últimos tuneles generados.
 # Esto luego se sube a github para compartirlo con las aplicaciones que lo utilizan.
 # FALTA EL DE NGROK.
-$localtunnel_path_url = "C:\Users\Escritorio\Desktop\scriptTunnels\endpointsParaGithub\archivosTemp\localtunnel_url.txt"
-$endpointsJSON_path = "C:\Users\Escritorio\Desktop\scriptTunnels\endpointsParaGithub\endpoints.json"
-$addcommitpush_path = "C:\Users\Escritorio\Desktop\scriptTunnels\endpointsParaGithub"
+$localtunnel_path_url = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosTemp\localtunnel_url.txt"
+$endpointsJSON_path = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\endpoints.json"
+$addcommitpush_path = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub"
 
 if (Test-Path $localtunnel_path_url) {
     $localtunnel_content = Get-Content -Path $localtunnel_path_url
