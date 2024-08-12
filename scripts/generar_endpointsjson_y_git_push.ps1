@@ -13,7 +13,7 @@ if (Test-Path $localtunnel_path_url) {
 
     try{
         $contenido_json | Out-File -FilePath $endpointsJSON_path -Encoding utf8
-        Write-Output "$localtunnel_url_sola ESCRITA EN $endpointsJSON_path CORRECTAMENTE"
+        Write-Warning "$localtunnel_url_sola ESCRITA EN $endpointsJSON_path CORRECTAMENTE"
     }catch{
         Write-Warning "ERROR ESCRIBBIENDO $localtunnel_url_sola EN $endpointsJSON_path"
     }

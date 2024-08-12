@@ -2,8 +2,11 @@
 $nodePath = "C:\Program Files\nodejs\node.exe"
 $ltPath = "C:\Users\Server\AppData\Roaming\npm\node_modules\localtunnel\bin\lt.js"
 $port = 3000
+
 $urlPath = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosTemp\localtunnel_url.txt"
+$urlPath_errors = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosTemp\localtunnel_errors.txt"
 $pidPath = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosTemp\localtunnel_pid.txt"
+
 $script_generar_endpoint_push = "C:\Users\Server\Desktop\scriptsTunnels\scripts\generar_endpointsjson_y_git_push.ps1"
 
 # Leer el PID de localtunnel si existe
@@ -21,13 +24,14 @@ if (Test-Path $pidPath) {
 }
 
 # Ejecutar localtunnel y redirigir la salida
-$process = Start-Process -FilePath $nodePath -ArgumentList "`"$ltPath`" --port $port" -RedirectStandardOutput $urlPath -PassThru -NoNewWindow
 
+#$process = Start-Process -FilePath $nodePath -ArgumentList ""$ltPath" --port $port" -RedirectStandardOutput $urlPath -PassThru
+$process = Start-Process -FilePath "C:\Windows\system32\cmd.exe" -ArgumentList "/k", "node C:\Users\Server\AppData\Roaming\npm\node_modules\localtunnel\bin\lt.js --port 3000" -RedirectStandardOutput $urlPath -RedirectStandardError $urlPath_errors -PassThru
+$process.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High
 # Guardar el nuevo PID en un archivo
 $process.Id | Out-File -FilePath $pidPath
-
+Write-Output $process.StandardOutput
 Write-Output "Nuevo proceso localtunnel iniciado con PID $($process.Id)."
-
 #Esperamos 5s y ejecutamos el script para generar el json y subirlo a Github.
 Start-Sleep -Seconds 5
 &$script_generar_endpoint_push
