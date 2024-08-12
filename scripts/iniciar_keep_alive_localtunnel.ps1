@@ -8,7 +8,7 @@ $urlPath_errors = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\ar
 $pidPath = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosTemp\localtunnel_pid.txt"
 $script_generar_endpoint_push = "C:\Users\Server\Desktop\scriptsTunnels\scripts\generar_endpointsjson_y_git_push.ps1"
 
-$restartInterval = 60  # 6 * 60 * 60 - 6 horas en segundos
+$restartInterval = 6 * 60 * 60  # 6 * 60 * 60 - 6 horas en segundos
 $elapsedTime = 0  # Tiempo transcurrido en segundos para reiniciar.
 
 function Start-LocalTunnel {
