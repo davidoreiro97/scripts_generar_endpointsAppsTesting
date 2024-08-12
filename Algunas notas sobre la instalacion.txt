@@ -9,6 +9,6 @@ npm install -g localtunnel
 ----> Abrir la terminar como admin
 1. Instalar chocolatey como gestor de paquetes para windows : Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 2. Instalar ngrok : choco install ngrok
-3. Autenticarse en ngrok : ngrok config add-authtoken 2kRk3v7nCWvskoO3CoOqxIwPJFN_6hfz2LBezhuZCmmA9nnSH
+3. Autenticarse en ngrok : ngrok config add-authtoken MY_AUTH_TOKEN(se consigue en la página de ngrok)
 4. Correr ngrok en el puerto solicitado : ngrok http XXXX(Puerto)
 
