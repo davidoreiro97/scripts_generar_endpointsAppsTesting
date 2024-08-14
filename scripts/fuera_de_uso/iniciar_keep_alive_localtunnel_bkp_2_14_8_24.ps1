@@ -12,16 +12,15 @@ $urlGenerada = ""
 $restartInterval = 6 * 60 * 60  # 6 * 60 * 60 - 6 horas en segundos
 $elapsedTime = 0  # Tiempo transcurrido en segundos para reiniciar.
 
-function Start-LocalTunnel {
+unction Start-LocalTunnel {
     while ($true) {
         $process = Start-Process -FilePath $nodePath -ArgumentList "$ltPath --port $port" -RedirectStandardOutput $urlPath -RedirectStandardError $urlPath_errors -PassThru
         $process.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High
         Start-Sleep -Seconds 3
         $process.Id | Out-File -FilePath $pidPath
         $urlGenerada = Get-Content -Path $urlPath
-        $urlGenerada -match 'https:\/\/[^\s]*' | Out-Null
-        $localtunnel_url = $matches[0]
-        if($localtunnel_url -ne "" -and $localtunnel_url -ne $null){
+
+        if($urlGenerada -ne "" -and $urlGenerada -ne $null){
             Write-Warning "Nuevo proceso localtunnel iniciado con PID $($process.Id)."
             Start-Sleep -Seconds 5
             # Script para generar el json y subirlo a Github.
