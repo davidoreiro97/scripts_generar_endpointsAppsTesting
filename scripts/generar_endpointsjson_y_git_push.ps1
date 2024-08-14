@@ -13,9 +13,9 @@ if (Test-Path $localtunnel_path_url) {
 
     try{
         $contenido_json | Out-File -FilePath $endpointsJSON_path -Encoding utf8
-        Write-Warning "$localtunnel_url_sola ESCRITA EN $endpointsJSON_path CORRECTAMENTE"
+        Write-Host "$localtunnel_url_sola ESCRITA EN $endpointsJSON_path CORRECTAMENTE"
     }catch{
-        Write-Warning "ERROR ESCRIBBIENDO $localtunnel_url_sola EN $endpointsJSON_path"
+        Write-Error "ERROR ESCRIBBIENDO $localtunnel_url_sola EN $endpointsJSON_path"
     }
 
     Start-Sleep -Seconds 5
@@ -25,9 +25,9 @@ if (Test-Path $localtunnel_path_url) {
       git add .
       git commit -m "Actualización de los endpoints."
       git push origin master
-      Write-Output "ARCHIVO JSON CON LOS ENDPOINTS SUBIDOS CORRECTAMENTE"
+      Write-Host "ARCHIVO JSON CON LOS ENDPOINTS SUBIDOS CORRECTAMENTE"
     }catch{
-      Write-Output "ERROR SUBIENDO EL JSON CON LOS ENDPOINTS"      
+      Write-Error "ERROR SUBIENDO EL JSON CON LOS ENDPOINTS"      
     }  
 }
 

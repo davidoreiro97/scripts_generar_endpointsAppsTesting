@@ -7,31 +7,19 @@ $urlPath = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosT
 $urlPath_errors = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosTemp\localtunnel_errors.txt"
 $pidPath = "C:\Users\Server\Desktop\scriptsTunnels\endpointsParaGithub\archivosTemp\localtunnel_pid.txt"
 $script_generar_endpoint_push = "C:\Users\Server\Desktop\scriptsTunnels\scripts\generar_endpointsjson_y_git_push.ps1"
-$urlGenerada = ""
 
 $restartInterval = 6 * 60 * 60  # 6 * 60 * 60 - 6 horas en segundos
 $elapsedTime = 0  # Tiempo transcurrido en segundos para reiniciar.
 
-unction Start-LocalTunnel {
-    while ($true) {
-        $process = Start-Process -FilePath $nodePath -ArgumentList "$ltPath --port $port" -RedirectStandardOutput $urlPath -RedirectStandardError $urlPath_errors -PassThru
-        $process.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High
-        Start-Sleep -Seconds 3
-        $process.Id | Out-File -FilePath $pidPath
-        $urlGenerada = Get-Content -Path $urlPath
-
-        if($urlGenerada -ne "" -and $urlGenerada -ne $null){
-            Write-Warning "Nuevo proceso localtunnel iniciado con PID $($process.Id)."
-            Start-Sleep -Seconds 5
-            # Script para generar el json y subirlo a Github.
-            &$script_generar_endpoint_push
-            return $process
-        } else {
-            Write-Error "El proceso con PID : $($process.Id) se reiniciará ya que no devolvió una URL."
-            Stop-Process -Id $process.Id -ErrorAction Stop
-            Start-Sleep -Seconds 2  # Espera breve antes de intentar de nuevo
-        }
-    }
+function Start-LocalTunnel {
+    $process = Start-Process -FilePath $nodePath -ArgumentList "$ltPath --port $port" -RedirectStandardOutput $urlPath -RedirectStandardError $urlPath_errors -PassThru
+    $process.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High
+    $process.Id | Out-File -FilePath $pidPath
+    Write-Warning "Nuevo proceso localtunnel iniciado con PID $($process.Id)."
+    Start-Sleep -Seconds 5
+    # Script para generar el json y subirlo a Github.
+    &$script_generar_endpoint_push
+    return $process
 }
 
 function Check-ProcessById {
@@ -63,7 +51,7 @@ if (Test-Path $pidPath) {
 while ($true) {
     # Comprobar si el proceso se ha cerrado
     if ($process.HasExited) {
-        Write-Error "El proceso localtunnel con PID $($process.Id) se cerró. Reiniciando..."
+        Write-Warning "El proceso localtunnel con PID $($process.Id) se cerró. Reiniciando..."
         $process = Start-LocalTunnel
         $elapsedTime = 0  # Reiniciar el contador de tiempo
     }
@@ -71,7 +59,7 @@ while ($true) {
     $elapsedTime++
     # Comprobar si ha pasado el intervalo de reinicio
     if ($elapsedTime -ge $restartInterval) {
-        Write-Warning "Reiniciando el proceso localtunnel con PID $($process.Id) despuesde 6 horas..."
+         Write-Warning "Reiniciando el proceso localtunnel con PID $($process.Id) despuesde 6 horas..."
         Stop-Process -Id $process.Id -ErrorAction Stop
         $process = Start-LocalTunnel
         $elapsedTime = 0  # Reiniciar el contador de tiempo
