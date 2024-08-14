@@ -40,7 +40,7 @@
 - Inicializar el repositorio "endpointsParaGithub" con git init.
 - Agregar el repositorio remoto donde se subira el json con los endpoints, en mi caso git remote add origin https://github.com/davidoreiro97/endpointsAppsTesting.git
 - Hacer un pull si hay cambios en el repositorio.
-- Crear la carpeta "archivosTemp".
+- Crear la carpeta "archivosTemp" dentro de la carpeta endpointsParaGithub.
 - Previamente debe estar instalado ngrok([ngrok](https://ngrok.com/)) y localtunnel([localtunnel](https://theboroer.github.io/localtunnel-www/)).
 - Editar dentro del script "iniciar_keep_alive_localtunnel.ps1" :
   - $nodePath : Cambiar la ruta hacia donde esté instalado node.exe .
