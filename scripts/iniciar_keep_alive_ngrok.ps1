@@ -27,7 +27,7 @@ function Get-Url-Tunel {
 
 function Start-Ngrok {
     while ($true) {
-        Write-Host "Iniciando ngrok en el puerto $port"
+        Write-Host "Iniciando ngrok redireccionando al puerto $port"
         $process = Start-Process -FilePath "C:\Windows\System32\cmd.exe" -ArgumentList "/k", "ngrok http 6000" -RedirectStandardError $urlPath_errors -PassThru
         $process.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::High
         Start-Sleep -Seconds 5
@@ -75,7 +75,7 @@ if (Test-Path $pidPath) {
     $pidNgrok_int = [int] $pidNgrok  # Se castea como INT
     $result = Check-ProcessById -process_id $pidNgrok_int
     if ($result) {
-        Write-Warning "Proceso Ngrok con PID $pidNgrok detenido."
+        Write-Warning "Proceso Ngrok con PID $pidNgrok detenido (se trata de detener igual aunque no esté)."
         $ngrokProcesses = Get-Process -Name "ngrok" -ErrorAction SilentlyContinue
         if ($ngrokProcesses) {
             foreach ($process in $ngrokProcesses) {

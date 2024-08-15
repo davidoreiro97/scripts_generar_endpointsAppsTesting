@@ -22,7 +22,7 @@ function Start-LocalTunnel {
         $urlGenerada -match 'https:\/\/[^\s]*' | Out-Null
         $localtunnel_url = $matches[0]
         if($localtunnel_url -ne "" -and $localtunnel_url -ne $null){
-            Write-Warning "Nuevo proceso localtunnel iniciado con PID $($process.Id)."
+            Write-Warning "Nuevo proceso localtunnel iniciado con PID $($process.Id) redireccionando al puerto $port."
             Start-Sleep -Seconds 5
             # Script para generar el json y subirlo a Github.
             &$script_generar_endpoint_push
