@@ -29,7 +29,7 @@ function Start-LocalTunnel {
             return $process
         } else {
             Write-Error "El proceso con PID : $($process.Id) se reiniciará ya que no devolvió una URL."
-            Stop-Process -Id $process.Id -ErrorAction Stop
+            Stop-Process -Id $process.Id -ErrorAction Continue
             Start-Sleep -Seconds 2  # Espera breve antes de intentar de nuevo
         }
     }
@@ -40,7 +40,7 @@ function Check-ProcessById {
         [int] $process_id
     )
     try{
-    $process = Get-Process -Id $process_id -ErrorAction Stop 
+    $process = Get-Process -Id $process_id -ErrorAction Continue 
     return $true
     }catch{
     return $false
@@ -73,7 +73,7 @@ while ($true) {
     # Comprobar si ha pasado el intervalo de reinicio
     if ($elapsedTime -ge $restartInterval) {
         Write-Warning "Reiniciando el proceso localtunnel con PID $($process.Id) despuesde 6 horas..."
-        Stop-Process -Id $process.Id -ErrorAction Stop
+        Stop-Process -Id $process.Id -ErrorAction Continue
         $process = Start-LocalTunnel
         $elapsedTime = 0  # Reiniciar el contador de tiempo
     }

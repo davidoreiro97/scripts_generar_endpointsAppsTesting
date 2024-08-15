@@ -48,7 +48,7 @@ function Start-Ngrok {
             if ($ngrokProcesses) {
                 foreach ($process in $ngrokProcesses) {
                     Write-Warning "Deteniendo proceso Ngrok con PID $($process.Id)"
-                    Stop-Process -Id $process.Id -Force -ErrorAction Stop
+                    Stop-Process -Id $process.Id -Force -ErrorAction Continue
                 }
             }
             Start-Sleep -Seconds 5  # Espera breve antes de intentar de nuevo
@@ -62,7 +62,7 @@ function Check-ProcessById {
         [int] $process_id
     )
     try{
-    $process = Get-Process -Id $process_id -ErrorAction Stop 
+    $process = Get-Process -Id $process_id -ErrorAction Continue 
     return $true
     }catch{
     return $false
@@ -80,7 +80,7 @@ if (Test-Path $pidPath) {
         if ($ngrokProcesses) {
             foreach ($process in $ngrokProcesses) {
                 Write-Warning "Deteniendo proceso Ngrok con PID $($process.Id)"
-                Stop-Process -Id $process.Id -Force -ErrorAction Stop
+                Stop-Process -Id $process.Id -Force -ErrorAction Continue
             }
         }
     } else {
@@ -102,12 +102,12 @@ while ($true) {
     # Comprobar si ha pasado el intervalo de reinicio
     if ($elapsedTime -ge $restartInterval) {
         Write-Warning "Reiniciando el proceso Ngrok con PID $($process.Id) despuesde 2 horas..."
-        Stop-Process -Id $process.Id -ErrorAction Stop
+        Stop-Process -Id $process.Id -ErrorAction Continue
         $ngrokProcesses = Get-Process -Name "ngrok" -ErrorAction SilentlyContinue
         if ($ngrokProcesses) {
             foreach ($process in $ngrokProcesses) {
                 Write-Warning "Deteniendo proceso Ngrok con PID $($process.Id)"
-                Stop-Process -Id $process.Id -Force -ErrorAction Stop
+                Stop-Process -Id $process.Id -Force -ErrorAction Continue
             }
         }
         $process = Start-Ngrok
