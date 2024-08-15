@@ -15,8 +15,8 @@ if ((Test-Path $localtunnel_path_url) -and (Test-Path $ngrok_path_url)) {
     try{
         $contenido_json | Out-File -FilePath $endpointsJSON_path -Encoding utf8
         Write-Host "+ -------------------------------------------------------------------------------- +"
-        Write-Host "$$ngrok_url_sola ESCRITA EN $endpointsJSON_path CORRECTAMENTE"
-        Write-Host "$localtunnel_url_sola y $ngrok_url_sola ESCRITA EN $endpointsJSON_path CORRECTAMENTE"
+        Write-Host "$ngrok_url_sola ESCRITA EN $endpointsJSON_path CORRECTAMENTE"
+        Write-Host "$localtunnel_url_sola ESCRITA EN $endpointsJSON_path CORRECTAMENTE"
         Write-Host "+ -------------------------------------------------------------------------------- +"
     }catch{
         Write-Error "ERROR ESCRIBIENDO $localtunnel_url_sola y $ngrok_url_sola EN $endpointsJSON_path"
