@@ -11,7 +11,7 @@ $api_ngrok_url_tuneles = "https://api.ngrok.com/tunnels"
 $ngrok_api_token_path = "C:\Users\Server\Desktop\scriptsTunnels\ngrok_api_token.txt"
 $ngrok_api_token = Get-Content -Path $ngrok_api_token_path
 
-$restartInterval = 2 * 60 * 60  # 2 * 60 * 60 - 2 horas en segundos
+$restartInterval = 2.5 * 60 * 60  # 2.5 * 60 * 60 - 2:30 horas en segundos
 $elapsedTime = 0  # Tiempo transcurrido en segundos para reiniciar.
 
 function Get-Url-Tunel {
@@ -44,13 +44,6 @@ function Start-Ngrok {
         } else {
             Write-Error "El proceso con PID : $($process.Id) se reiniciará ya que no devolvió una URL."
             Stop-Process -Id $process.Id -ErrorAction Stop
-            $ngrokProcesses = Get-Process -Name "ngrok" -ErrorAction SilentlyContinue
-            if ($ngrokProcesses) {
-                foreach ($process in $ngrokProcesses) {
-                    Write-Warning "Deteniendo proceso Ngrok con PID $($process.Id)"
-                    Stop-Process -Id $process.Id -Force -ErrorAction Stop
-                }
-            }
             Start-Sleep -Seconds 5  # Espera breve antes de intentar de nuevo
         }
         return $process
@@ -76,22 +69,15 @@ if (Test-Path $pidPath) {
     $result = Check-ProcessById -process_id $pidNgrok_int
     if ($result) {
         Write-Warning "Proceso Ngrok con PID $pidNgrok detenido."
-        $ngrokProcesses = Get-Process -Name "ngrok" -ErrorAction SilentlyContinue
-        if ($ngrokProcesses) {
-            foreach ($process in $ngrokProcesses) {
-                Write-Warning "Deteniendo proceso Ngrok con PID $($process.Id)"
-                Stop-Process -Id $process.Id -Force -ErrorAction Stop
-            }
-        }
     } else {
         Write-Warning "No se pudo detener el proceso Ngrok con PID $pidNgrok. Puede que ya esté detenido."
     }
     $process = Start-Ngrok
 }
 
-# Mantener el proceso vivo y reiniciar cada 2 horas
+# Mantener el proceso vivo y reiniciar cada 6 horas
 while ($true) {
-    # Comprobar si el proceso se ha cerrado (esto se debería hacer con una matriz obtenida en Get-Process -Name "ngrok", pero me quiero ir a dormir)
+    # Comprobar si el proceso se ha cerrado
     if ($process.HasExited) {
         Write-Error "El proceso Ngrok con PID $($process.Id) se cerró. Reiniciando..."
         $process = Start-Ngrok
@@ -103,13 +89,6 @@ while ($true) {
     if ($elapsedTime -ge $restartInterval) {
         Write-Warning "Reiniciando el proceso Ngrok con PID $($process.Id) despuesde 2 horas..."
         Stop-Process -Id $process.Id -ErrorAction Stop
-        $ngrokProcesses = Get-Process -Name "ngrok" -ErrorAction SilentlyContinue
-        if ($ngrokProcesses) {
-            foreach ($process in $ngrokProcesses) {
-                Write-Warning "Deteniendo proceso Ngrok con PID $($process.Id)"
-                Stop-Process -Id $process.Id -Force -ErrorAction Stop
-            }
-        }
         $process = Start-Ngrok
         $elapsedTime = 0  # Reiniciar el contador de tiempo
     }
