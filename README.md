@@ -16,13 +16,14 @@
     , generar dos documentos de texto en la ruta ./endpointsParaGithub/archivosTemp llamados "localtunnel_pid.txt" y "localtunnel_url.txt", estos contienen el número de proceso de localtunnel para matarlo luego y volverlo a iniciar y
     la url del tunnel generado, además reinicia el proceso cada 6h generando una url nueva y si inesperadamente se cierra el proceso node lo vuelve a iniciar, se debe utilizar una sola vez al iniciar el SO.
 
-  - reset_ngrok.ps1 : Hará lo mismo que el script de localtunnel para ngrok, se utilizan dos tuneles ya que no son muy estables al ser gratuitos.
+  - reset_ngrok.ps1 : Hace lo mismo que el script de localtunnel, solo que ngrok ofrece una API para directamente consultar la url de los tuneles abiertos en tu cliente y, en
+    lugar de volcar la salida en un .txt se consulta directamente a la API.
 
   - generar_endpointsjson_y_git_push.ps1 : Este script utiliza una ER para obtener la urls guardadas en localtunnel_url.txt y
     nrgok_url.txt, luego de esto arma un json con las dos rutas de los tuneles y los sube al repositorio (el cual previamente)
     se debe configurar ( [Repositorio](https://github.com/davidoreiro97/endpointsAppsTesting.git) ).
 
-  - CArpeta fuera_de_uso : Scripts que fueron para pruebas, o backups.
+  - Carpeta fuera_de_uso : Scripts que fueron para pruebas, o backups.
 
 - Carpeta "endpointsParaGithub"
 
